@@ -8,6 +8,6 @@
         "node-red-contrib-crypto-js": "~0.1.1",
         "node-red-dashboard": "~2.9.4",
         "node-red": "^0.18.2",
-        "node-red-contrib-salesforce": "0.2.1",
+        "node-red-contrib-salesforce": "0.2.1"
     }
 }
