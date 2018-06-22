@@ -1,7 +1,0 @@
-{
-  "name": "Node-RED Heroku",
-  "description": "Run Node-RED on Heroku",
-  "repository": "https://github.com/HenriquePereiraRosa/node-red-tcc",
-  "keywords": ["node", "node-red"],
-  "image": "heroku/nodejs"
-}
