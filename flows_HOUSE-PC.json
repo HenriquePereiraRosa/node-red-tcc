@@ -301,7 +301,7 @@
         "seg1": "",
         "seg2": "",
         "x": 757,
-        "y": 394,
+        "y": 397,
         "wires": []
     },
     {
@@ -333,9 +333,9 @@
         "xformat": "HH:mm",
         "interpolate": "linear",
         "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
+        "dot": true,
+        "ymin": "-0.5",
+        "ymax": "10",
         "removeOlder": "24",
         "removeOlderPoints": "",
         "removeOlderUnit": "3600",
