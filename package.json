@@ -3,6 +3,8 @@
     "description": "A Node-RED Project",
     "version": "0.0.1",
     "dependencies": {
+        "node": "10.1.0",
+        "npm": "5.7.1",
         "node-red-contrib-crypto-js": "~0.1.1",
         "node-red-dashboard": "~2.9.4"
     }
