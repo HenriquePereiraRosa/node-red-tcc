@@ -3,14 +3,11 @@
 FLOWS_CRED_FILE=.node-red/flows_cred.json
 cat > $FLOWS_CRED_FILE << EOF
 {
-    "1183f03b.fae04": {
+    "318cfe88.fdfb32": {
         "user": "${MQTT_USER}",
         "password": "${MQTT_PASSWORD}"
     },
-    "d56617a5.79e518": {
-        "apiKey": "${THINGSPEAK_API_KEY}"
-    },
-    "d11b744b.bc4f38": {
+    "b99fadd5.5c6b9": {
         "user": "${MQTT_USER}",
         "password": "${MQTT_PASSWORD}"
     }
