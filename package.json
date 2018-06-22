@@ -1,31 +1,9 @@
 {
-  "name": "node-red-tcc",
-  "version": "0.0.1",
-  "description": "Node-RED TCC on Heroku",
-  "engines": {
-    "node": "10.1.0"
-  },
-  "scripts": {
-    "start": "node-red --settings ./.node-red/settings.js --userDir ./.node-red",
-    "postinstall": "scripts/postinstall.sh"
-  },
-  "dependencies": {
-    "node-red": "*",
-    "firebase": "*",
-    "node-red-admin": "*",
-    "node-red-contrib-thingspeak42":"*",
-    "node-red-contrib-firebase": "*",
-    "node-red-contrib-crypto-js": "~0.1.1",
-    "node-red-dashboard": "~2.9.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/HenriquePereiraRosa/node-red-tcc"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "node-red"
-  ],
-  "license": ""
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "dependencies": {
+        "node-red-contrib-crypto-js": "~0.1.1",
+        "node-red-dashboard": "~2.9.4"
+    }
 }
