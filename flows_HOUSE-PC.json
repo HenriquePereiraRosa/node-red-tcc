@@ -1,15 +1,15 @@
 [
     {
-        "id": "12134e3d.409a42",
+        "id": "7499bf5e.a278",
         "type": "tab",
         "label": "TCC AR CONDICIONADO",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "c6e2d8a.ba05c28",
+        "id": "95101c56.a8c1b",
         "type": "comment",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "DET-11",
         "info": "",
         "x": 80,
@@ -17,39 +17,39 @@
         "wires": []
     },
     {
-        "id": "5590b771.5e6138",
+        "id": "6da24f8c.81f83",
         "type": "mqtt in",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "DET-11[Network Server-PUBLIC-Uplink]",
         "topic": "application/+/node/0004a30b001e8b8e/rx",
         "qos": "2",
-        "broker": "abebe2b6.328eb",
+        "broker": "bd0ed62a.ad7aa8",
         "x": 177,
         "y": 111,
         "wires": [
             [
-                "f31715e.71c4ee8"
+                "7d0f5947.0ae948"
             ]
         ]
     },
     {
-        "id": "f31715e.71c4ee8",
+        "id": "7d0f5947.0ae948",
         "type": "json",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Format JSON str to Obect",
         "pretty": false,
         "x": 214,
         "y": 150,
         "wires": [
             [
-                "12d2594c.416dd7"
+                "47cc9bfd.772ab4"
             ]
         ]
     },
     {
-        "id": "12d2594c.416dd7",
+        "id": "47cc9bfd.772ab4",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Parse JSON.data field",
         "func": "msg.payload = msg.payload.data;\nreturn msg;",
         "outputs": 1,
@@ -58,47 +58,47 @@
         "y": 188,
         "wires": [
             [
-                "7bfd4110.caf72"
+                "5fdf61e7.35ca9"
             ]
         ]
     },
     {
-        "id": "7bfd4110.caf72",
+        "id": "5fdf61e7.35ca9",
         "type": "decode",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Decode [Base64]",
         "encode": "Base64",
         "x": 220,
         "y": 233,
         "wires": [
             [
-                "f6443912.e50aa8"
+                "5e2edf84.5f681"
             ]
         ]
     },
     {
-        "id": "f6443912.e50aa8",
+        "id": "5e2edf84.5f681",
         "type": "encode",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "",
         "encode": "Hex",
         "x": 262,
         "y": 290,
         "wires": [
             [
-                "7043528.152d1ac",
-                "84919927.98ac18",
-                "d573619a.c7e9",
-                "1d4684e4.f5d8eb",
-                "31a75612.6ea06a",
-                "c9a1fe98.43d22"
+                "929108ed.d0b8a8",
+                "ca331be5.c6ba18",
+                "950b3ad6.574ed8",
+                "cb9d7f55.88149",
+                "be1ba290.09b7d",
+                "da9c3cc2.17dba"
             ]
         ]
     },
     {
-        "id": "7043528.152d1ac",
+        "id": "929108ed.d0b8a8",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Contagem Regressiva",
         "func": "//call constructor Date() and pass to now\nvar now = new Date();\n//time_now receive current time\nvar time_now = now.getTime();\n\nif (typeof last_broker_time === 'undefined'){\n    last_broker_time = time_now;\n}\n\nif (msg.payload){\n    last_broker_time = time_now;\n    } \n\n//1. diference between times\n//2. divide per 1000 to parse miliseconds to second\n//3. divide per 60 to parse second to minute\n//4. .toFixed(0) return an int value\n//5. parseInt(\"string\",10) --> returns a decimal value based on own string value\nvar difference_between_times = parseInt(((time_now - last_broker_time)/60000).toFixed(0),10);\n\n//pass to msg.payload the desire velue to show on gauge in dashboard\nmsg.payload = difference_between_times; \nreturn msg;",
         "outputs": 1,
@@ -107,14 +107,14 @@
         "y": 396.8040452003479,
         "wires": [
             [
-                "1572596f.c91357"
+                "e8cdabba.73d078"
             ]
         ]
     },
     {
-        "id": "e1c43a58.fd5b28",
+        "id": "641e1d54.5e1f64",
         "type": "inject",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "",
         "topic": "",
         "payload": "msg.time_sample",
@@ -126,14 +126,14 @@
         "y": 395.8040466308594,
         "wires": [
             [
-                "7043528.152d1ac"
+                "929108ed.d0b8a8"
             ]
         ]
     },
     {
-        "id": "84919927.98ac18",
+        "id": "ca331be5.c6ba18",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Voltage DET-11",
         "func": "msg.payload = (parseInt(msg.payload.substr(20,4),16)/1000).toFixed(2);\nreturn msg;",
         "outputs": 1,
@@ -142,14 +142,14 @@
         "y": 346,
         "wires": [
             [
-                "ae51be6f.179dc"
+                "6ee98a4e.884584"
             ]
         ]
     },
     {
-        "id": "31a75612.6ea06a",
+        "id": "be1ba290.09b7d",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Temperature-DET11",
         "func": "msg.payload = parseInt(msg.payload.substr(8,4),16)/10;\nreturn msg;",
         "outputs": 1,
@@ -158,14 +158,14 @@
         "y": 100.99217987060547,
         "wires": [
             [
-                "79be705c.11478"
+                "8ecf6052.abaab"
             ]
         ]
     },
     {
-        "id": "1d4684e4.f5d8eb",
+        "id": "cb9d7f55.88149",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Humidity-DET11",
         "func": "msg.payload = parseInt(msg.payload.substr(14,4),16)/10;\nreturn msg;",
         "outputs": 1,
@@ -174,14 +174,14 @@
         "y": 160.99217987060547,
         "wires": [
             [
-                "62df5d49.c3c6e4"
+                "5fa0fc7b.fff634"
             ]
         ]
     },
     {
-        "id": "d573619a.c7e9",
+        "id": "950b3ad6.574ed8",
         "type": "function",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "Current-DET11",
         "func": "current = (parseInt(msg.payload.substr(2,4),16)) - 102;\nif (current > 0){\n    msg.payload =(current/(0.066/(3.3/1024))).toFixed(2);\n}else{\n    msg.payload = 0;\n}\nreturn msg;",
         "outputs": 1,
@@ -190,16 +190,16 @@
         "y": 220.99217987060547,
         "wires": [
             [
-                "7dcc9485.9c1b7c",
-                "d30a5228.e447a"
+                "7563a62d.0d39e8",
+                "3a64197a.cedb36"
             ]
         ]
     },
     {
-        "id": "7dcc9485.9c1b7c",
+        "id": "7563a62d.0d39e8",
         "type": "ui_template",
-        "z": "12134e3d.409a42",
-        "group": "ece601df.efd3a",
+        "z": "7499bf5e.a278",
+        "group": "7b5f0616.4b4428",
         "name": "current",
         "order": 0,
         "width": "4",
@@ -215,10 +215,10 @@
         ]
     },
     {
-        "id": "79be705c.11478",
+        "id": "8ecf6052.abaab",
         "type": "ui_template",
-        "z": "12134e3d.409a42",
-        "group": "ece601df.efd3a",
+        "z": "7499bf5e.a278",
+        "group": "7b5f0616.4b4428",
         "name": "temperature",
         "order": 0,
         "width": "1",
@@ -234,10 +234,10 @@
         ]
     },
     {
-        "id": "62df5d49.c3c6e4",
+        "id": "5fa0fc7b.fff634",
         "type": "ui_template",
-        "z": "12134e3d.409a42",
-        "group": "ece601df.efd3a",
+        "z": "7499bf5e.a278",
+        "group": "7b5f0616.4b4428",
         "name": "humidity",
         "order": 0,
         "width": "1",
@@ -253,11 +253,11 @@
         ]
     },
     {
-        "id": "ae51be6f.179dc",
+        "id": "6ee98a4e.884584",
         "type": "ui_gauge",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "",
-        "group": "ece601df.efd3a",
+        "group": "7b5f0616.4b4428",
         "order": 0,
         "width": "3",
         "height": "2",
@@ -279,11 +279,11 @@
         "wires": []
     },
     {
-        "id": "1572596f.c91357",
+        "id": "e8cdabba.73d078",
         "type": "ui_gauge",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "",
-        "group": "ece601df.efd3a",
+        "group": "7b5f0616.4b4428",
         "order": 0,
         "width": "3",
         "height": "2",
@@ -305,9 +305,9 @@
         "wires": []
     },
     {
-        "id": "c9a1fe98.43d22",
+        "id": "da9c3cc2.17dba",
         "type": "debug",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "debug",
         "active": true,
         "tosidebar": true,
@@ -319,11 +319,11 @@
         "wires": []
     },
     {
-        "id": "d30a5228.e447a",
+        "id": "3a64197a.cedb36",
         "type": "ui_chart",
-        "z": "12134e3d.409a42",
+        "z": "7499bf5e.a278",
         "name": "",
-        "group": "ece601df.efd3a",
+        "group": "7b5f0616.4b4428",
         "order": 0,
         "width": "0",
         "height": "0",
@@ -361,13 +361,13 @@
         ]
     },
     {
-        "id": "abebe2b6.328eb",
+        "id": "bd0ed62a.ad7aa8",
         "type": "mqtt-broker",
         "z": "",
         "name": "mqttConnection",
         "broker": "networkserver.maua.br",
         "port": "1883",
-        "tls": "5f5923c6.cf8aec",
+        "tls": "fc16eb7c.0032c8",
         "clientid": "Node-RED from smartcampus",
         "usetls": false,
         "compatmode": true,
@@ -383,18 +383,18 @@
         "willPayload": ""
     },
     {
-        "id": "ece601df.efd3a",
+        "id": "7b5f0616.4b4428",
         "type": "ui_group",
         "z": "",
         "name": "DET-11: TCC Ar Condicionado",
-        "tab": "10bd35a.e3dcbca",
+        "tab": "3ff65872.c0a1c8",
         "order": 12,
         "disp": false,
         "width": "12",
         "collapse": false
     },
     {
-        "id": "5f5923c6.cf8aec",
+        "id": "fc16eb7c.0032c8",
         "type": "tls-config",
         "z": "",
         "name": "",
@@ -407,7 +407,7 @@
         "verifyservercert": true
     },
     {
-        "id": "10bd35a.e3dcbca",
+        "id": "3ff65872.c0a1c8",
         "type": "ui_tab",
         "z": "",
         "name": "TCC AR CONDICIONADO",
