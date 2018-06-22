@@ -1,1 +1,416 @@
-[{"id":"91d9484d.297638","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"b99fadd5.5c6b9","type":"mqtt-broker","z":"","name":"","broker":"networkserver.maua.br","port":"1883","tls":"bcb8adfd.c6021","clientid":"Node-RED from smartcampus","usetls":false,"compatmode":true,"keepalive":"200","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","closeTopic":"","closePayload":"","willTopic":"","willQos":"0","willPayload":""},{"id":"774515dd.c445ec","type":"ui_group","z":"","name":"DET-11 - [TCC Ar Cond.]","tab":"db24e3da.5e634","order":12,"disp":true,"width":"10"},{"id":"bcb8adfd.c6021","type":"tls-config","z":"","name":"","cert":"","key":"","ca":"","certname":"maua.br.crt","keyname":"maua.br.key ","caname":"intermediate.crt","verifyservercert":true},{"id":"db24e3da.5e634","type":"ui_tab","z":"","name":"IMT-CP-DET","icon":"dashboard"},{"id":"99c1b24a.70bcc","type":"ui_base","theme":{"name":"theme-dark","lightTheme":{"default":"#0094CE","baseColor":"#0094CE","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":true,"reset":false},"darkTheme":{"default":"#097479","baseColor":"#097479","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif","edited":true,"reset":false},"customTheme":{"name":"Untitled Theme 1","default":"#4B7930","baseColor":"#4B7930","baseFont":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"},"themeState":{"base-color":{"default":"#097479","value":"#097479","edited":false},"page-titlebar-backgroundColor":{"value":"#097479","edited":false},"page-backgroundColor":{"value":"#111111","edited":false},"page-sidebar-backgroundColor":{"value":"#000000","edited":false},"group-textColor":{"value":"#0eb8c0","edited":false},"group-borderColor":{"value":"#555555","edited":false},"group-backgroundColor":{"value":"#333333","edited":false},"widget-textColor":{"value":"#eeeeee","edited":false},"widget-backgroundColor":{"value":"#097479","edited":false},"widget-borderColor":{"value":"#333333","edited":false},"base-font":{"value":"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"}}},"site":{"name":"Node-RED Dashboard","hideToolbar":"false","allowSwipe":"false","allowTempTheme":"true","dateFormat":"DD/MM/YYYY","sizes":{"sx":48,"sy":48,"gx":6,"gy":6,"cx":6,"cy":6,"px":0,"py":0}}},{"id":"768c13e5.29562c","type":"comment","z":"91d9484d.297638","name":"DET-11","info":"","x":57,"y":29,"wires":[]},{"id":"c2c1e7ec.b93128","type":"comment","z":"91d9484d.297638","name":"Uplink","info":"","x":57,"y":71,"wires":[]},{"id":"af05f345.54271","type":"comment","z":"91d9484d.297638","name":"Downlink","info":"","x":80,"y":480,"wires":[]},{"id":"318cfe88.fdfb32","type":"mqtt in","z":"91d9484d.297638","name":"DET-11[Network Server-PUBLIC-Uplink]","topic":"application/+/node/0004a30b001e8b8e/rx","qos":"2","broker":"b99fadd5.5c6b9","x":177,"y":111,"wires":[["9ddba24c.54215"]]},{"id":"9ddba24c.54215","type":"json","z":"91d9484d.297638","name":"Format JSON str to Obect","pretty":false,"x":214,"y":150,"wires":[["e046a0ae.f35ce"]]},{"id":"e046a0ae.f35ce","type":"function","z":"91d9484d.297638","name":"Parse JSON.data field","func":"msg.payload = msg.payload.data;\nreturn msg;","outputs":1,"noerr":0,"x":222,"y":188,"wires":[["bdde711e.1b03e"]]},{"id":"bdde711e.1b03e","type":"decode","z":"91d9484d.297638","name":"Decode [Base64]","encode":"Base64","x":220,"y":233,"wires":[["a4f2eb8a.e61d98"]]},{"id":"a4f2eb8a.e61d98","type":"encode","z":"91d9484d.297638","name":"","encode":"Hex","x":262,"y":290,"wires":[["9f12a015.ff68a","487966bf.b744f8","26fdc821.f3fc98","e87d563.0e6bfa8","d4099fc.c57b26","85b6bb49.066638"]]},{"id":"9f12a015.ff68a","type":"function","z":"91d9484d.297638","name":"Contagem Regressiva","func":"//call constructor Date() and pass to now\nvar now = new Date();\n//time_now receive current time\nvar time_now = now.getTime();\n\nif (typeof last_broker_time === 'undefined'){\n    last_broker_time = time_now;\n}\n\nif (msg.payload){\n    last_broker_time = time_now;\n    } \n\n//1. diference between times\n//2. divide per 1000 to parse miliseconds to second\n//3. divide per 60 to parse second to minute\n//4. .toFixed(0) return an int value\n//5. parseInt(\"string\",10) --> returns a decimal value based on own string value\nvar difference_between_times = parseInt(((time_now - last_broker_time)/60000).toFixed(0),10);\n\n//pass to msg.payload the desire velue to show on gauge in dashboard\nmsg.payload = difference_between_times; \nreturn msg;","outputs":1,"noerr":0,"x":539.0199356079102,"y":396.8040452003479,"wires":[["711f671f.48d0a8"]]},{"id":"fcb15ffb.37bde","type":"inject","z":"91d9484d.297638","name":"","topic":"","payload":"msg.time_sample","payloadType":"global","repeat":"5","crontab":"","once":false,"x":245.01992797851562,"y":395.8040466308594,"wires":[["9f12a015.ff68a"]]},{"id":"c09fa3bf.536ee","type":"function","z":"91d9484d.297638","name":"","func":"msg.payload = '{ \"reference\": \"test-node-red\", \"confirmed\": false, \"fPort\": 100, \"data\": \"AAE=\"  }';\n\n\nreturn msg;","outputs":1,"noerr":0,"x":183,"y":572,"wires":[["97bcdf6d.66259"]]},{"id":"97bcdf6d.66259","type":"json","z":"91d9484d.297638","name":"Format JSON str to Obect","pretty":false,"x":516,"y":522,"wires":[["4f83c4b2.12ca9c"]]},{"id":"4f83c4b2.12ca9c","type":"mqtt out","z":"91d9484d.297638","name":"DET-11[Network Server-PUBLIC-Downlink]","topic":"application/+/node/0004a30b001e8b8e/tx","qos":"0","retain":"","broker":"b99fadd5.5c6b9","x":543,"y":578,"wires":[]},{"id":"395730f9.19a0f","type":"comment","z":"91d9484d.297638","name":"IMT-CP-DET","info":"","x":773.9999961853027,"y":55.00000309944153,"wires":[]},{"id":"487966bf.b744f8","type":"function","z":"91d9484d.297638","name":"Voltage DET-11","func":"msg.payload = (parseInt(msg.payload.substr(20,4),16)/1000).toFixed(2);\nreturn msg;","outputs":1,"noerr":0,"x":565,"y":346,"wires":[["102fb6ca.0deea9"]]},{"id":"d4099fc.c57b26","type":"function","z":"91d9484d.297638","name":"Temperature-DET11","func":"msg.payload = parseInt(msg.payload.substr(8,4),16)/10;\nreturn msg;","outputs":1,"noerr":0,"x":598.9603881835938,"y":100.99217987060547,"wires":[["895b1f7f.5880f"]]},{"id":"e87d563.0e6bfa8","type":"function","z":"91d9484d.297638","name":"Humidity-DET11","func":"msg.payload = parseInt(msg.payload.substr(14,4),16)/10;\nreturn msg;","outputs":1,"noerr":0,"x":568.9603881835938,"y":160.99217987060547,"wires":[["3516a9f9.f30db6"]]},{"id":"26fdc821.f3fc98","type":"function","z":"91d9484d.297638","name":"Current-DET11","func":"current = (parseInt(msg.payload.substr(2,4),16)) - 102;\nif (current > 0){\n    msg.payload =(current/(0.066/(3.3/1024))).toFixed(2);\n}else{\n    msg.payload = 0;\n}\nreturn msg;","outputs":1,"noerr":0,"x":578.9603881835938,"y":220.99217987060547,"wires":[["6adaec09.b8cdb4","a651d9a8.319758"]]},{"id":"6adaec09.b8cdb4","type":"ui_template","z":"91d9484d.297638","group":"774515dd.c445ec","name":"","order":0,"width":"10","height":"5","format":" <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:370%\"></center>\n<center style=\"font-size:150%\">A</center>\n</body>\n</html> \n","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":772.9603881835938,"y":220.99217224121094,"wires":[[]]},{"id":"895b1f7f.5880f","type":"ui_template","z":"91d9484d.297638","group":"774515dd.c445ec","name":"DET","order":0,"width":"5","height":"3","format":" <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:200%\"></center>\n<center style=\"font-size:70%\">°C</center>\n</body>\n</html> \n","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":778.9603881835938,"y":100.99217987060547,"wires":[[]]},{"id":"3516a9f9.f30db6","type":"ui_template","z":"91d9484d.297638","group":"774515dd.c445ec","name":"","order":0,"width":"5","height":"3","format":" <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:200%\"></center>\n<center style=\"font-size:70%\">%</center>\n</body>\n</html> \n","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":773.2299194335938,"y":160.99609375,"wires":[[]]},{"id":"102fb6ca.0deea9","type":"ui_gauge","z":"91d9484d.297638","name":"","group":"774515dd.c445ec","order":0,"width":"5","height":"5","gtype":"gage","title":" Bateria","label":"V","format":"{{value}}","min":"2.95","max":"3.4","colors":["#ff0000","#ffff00","#008000"],"seg1":"","seg2":"","x":774.229923248291,"y":346.9960906505585,"wires":[]},{"id":"711f671f.48d0a8","type":"ui_gauge","z":"91d9484d.297638","name":"","group":"774515dd.c445ec","order":0,"width":"5","height":"5","gtype":"donut","title":"Atualizado há","label":"min.","format":"{{value}}","min":"0","max":"20","colors":["#008000","#ffff00","#ff0000"],"seg1":"","seg2":"","x":757,"y":394,"wires":[]},{"id":"bff254ce.cdfa18","type":"ui_button","z":"91d9484d.297638","name":"","group":"774515dd.c445ec","order":0,"width":"10","height":"2","passthru":false,"label":"Press DET-11","color":"","bgcolor":"","icon":"","payload":"","payloadType":"str","topic":"","x":179,"y":517,"wires":[["c09fa3bf.536ee"]]},{"id":"85b6bb49.066638","type":"debug","z":"91d9484d.297638","name":"debug","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","x":473,"y":30,"wires":[]},{"id":"a651d9a8.319758","type":"ui_chart","z":"91d9484d.297638","name":"","group":"774515dd.c445ec","order":0,"width":0,"height":0,"label":"Corrente","chartType":"line","legend":"false","xformat":"HH:mm","interpolate":"linear","nodata":"","dot":false,"ymin":"","ymax":"","removeOlder":"24","removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"useOneColor":false,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"useOldStyle":false,"x":774,"y":281,"wires":[[],[]]}]
+[
+    {
+        "id": "12134e3d.409a42",
+        "type": "tab",
+        "label": "TCC AR CONDICIONADO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c6e2d8a.ba05c28",
+        "type": "comment",
+        "z": "12134e3d.409a42",
+        "name": "DET-11",
+        "info": "",
+        "x": 80,
+        "y": 70,
+        "wires": []
+    },
+    {
+        "id": "5590b771.5e6138",
+        "type": "mqtt in",
+        "z": "12134e3d.409a42",
+        "name": "DET-11[Network Server-PUBLIC-Uplink]",
+        "topic": "application/+/node/0004a30b001e8b8e/rx",
+        "qos": "2",
+        "broker": "abebe2b6.328eb",
+        "x": 177,
+        "y": 111,
+        "wires": [
+            [
+                "f31715e.71c4ee8"
+            ]
+        ]
+    },
+    {
+        "id": "f31715e.71c4ee8",
+        "type": "json",
+        "z": "12134e3d.409a42",
+        "name": "Format JSON str to Obect",
+        "pretty": false,
+        "x": 214,
+        "y": 150,
+        "wires": [
+            [
+                "12d2594c.416dd7"
+            ]
+        ]
+    },
+    {
+        "id": "12d2594c.416dd7",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Parse JSON.data field",
+        "func": "msg.payload = msg.payload.data;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 222,
+        "y": 188,
+        "wires": [
+            [
+                "7bfd4110.caf72"
+            ]
+        ]
+    },
+    {
+        "id": "7bfd4110.caf72",
+        "type": "decode",
+        "z": "12134e3d.409a42",
+        "name": "Decode [Base64]",
+        "encode": "Base64",
+        "x": 220,
+        "y": 233,
+        "wires": [
+            [
+                "f6443912.e50aa8"
+            ]
+        ]
+    },
+    {
+        "id": "f6443912.e50aa8",
+        "type": "encode",
+        "z": "12134e3d.409a42",
+        "name": "",
+        "encode": "Hex",
+        "x": 262,
+        "y": 290,
+        "wires": [
+            [
+                "7043528.152d1ac",
+                "84919927.98ac18",
+                "d573619a.c7e9",
+                "1d4684e4.f5d8eb",
+                "31a75612.6ea06a",
+                "c9a1fe98.43d22"
+            ]
+        ]
+    },
+    {
+        "id": "7043528.152d1ac",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Contagem Regressiva",
+        "func": "//call constructor Date() and pass to now\nvar now = new Date();\n//time_now receive current time\nvar time_now = now.getTime();\n\nif (typeof last_broker_time === 'undefined'){\n    last_broker_time = time_now;\n}\n\nif (msg.payload){\n    last_broker_time = time_now;\n    } \n\n//1. diference between times\n//2. divide per 1000 to parse miliseconds to second\n//3. divide per 60 to parse second to minute\n//4. .toFixed(0) return an int value\n//5. parseInt(\"string\",10) --> returns a decimal value based on own string value\nvar difference_between_times = parseInt(((time_now - last_broker_time)/60000).toFixed(0),10);\n\n//pass to msg.payload the desire velue to show on gauge in dashboard\nmsg.payload = difference_between_times; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 539.0199356079102,
+        "y": 396.8040452003479,
+        "wires": [
+            [
+                "1572596f.c91357"
+            ]
+        ]
+    },
+    {
+        "id": "e1c43a58.fd5b28",
+        "type": "inject",
+        "z": "12134e3d.409a42",
+        "name": "",
+        "topic": "",
+        "payload": "msg.time_sample",
+        "payloadType": "global",
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "x": 245.01992797851562,
+        "y": 395.8040466308594,
+        "wires": [
+            [
+                "7043528.152d1ac"
+            ]
+        ]
+    },
+    {
+        "id": "84919927.98ac18",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Voltage DET-11",
+        "func": "msg.payload = (parseInt(msg.payload.substr(20,4),16)/1000).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 565,
+        "y": 346,
+        "wires": [
+            [
+                "ae51be6f.179dc"
+            ]
+        ]
+    },
+    {
+        "id": "31a75612.6ea06a",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Temperature-DET11",
+        "func": "msg.payload = parseInt(msg.payload.substr(8,4),16)/10;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560.9603881835938,
+        "y": 100.99217987060547,
+        "wires": [
+            [
+                "79be705c.11478"
+            ]
+        ]
+    },
+    {
+        "id": "1d4684e4.f5d8eb",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Humidity-DET11",
+        "func": "msg.payload = parseInt(msg.payload.substr(14,4),16)/10;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 568.9603881835938,
+        "y": 160.99217987060547,
+        "wires": [
+            [
+                "62df5d49.c3c6e4"
+            ]
+        ]
+    },
+    {
+        "id": "d573619a.c7e9",
+        "type": "function",
+        "z": "12134e3d.409a42",
+        "name": "Current-DET11",
+        "func": "current = (parseInt(msg.payload.substr(2,4),16)) - 102;\nif (current > 0){\n    msg.payload =(current/(0.066/(3.3/1024))).toFixed(2);\n}else{\n    msg.payload = 0;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 578.9603881835938,
+        "y": 220.99217987060547,
+        "wires": [
+            [
+                "7dcc9485.9c1b7c",
+                "d30a5228.e447a"
+            ]
+        ]
+    },
+    {
+        "id": "7dcc9485.9c1b7c",
+        "type": "ui_template",
+        "z": "12134e3d.409a42",
+        "group": "ece601df.efd3a",
+        "name": "current",
+        "order": 0,
+        "width": "4",
+        "height": "2",
+        "format": " <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:250%;\"></center>\n<center style=\"font-size:150%\">A</center>\n</body>\n</html> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 772.9603881835938,
+        "y": 220.99217224121094,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79be705c.11478",
+        "type": "ui_template",
+        "z": "12134e3d.409a42",
+        "group": "ece601df.efd3a",
+        "name": "temperature",
+        "order": 0,
+        "width": "1",
+        "height": "2",
+        "format": " <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:150%\"></center>\n<center style=\"font-size:70%\">°C</center>\n</body>\n</html> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 760.9603881835938,
+        "y": 100.99217987060547,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "62df5d49.c3c6e4",
+        "type": "ui_template",
+        "z": "12134e3d.409a42",
+        "group": "ece601df.efd3a",
+        "name": "humidity",
+        "order": 0,
+        "width": "1",
+        "height": "2",
+        "format": " <!DOCTYPE html>\n<html>\n<body>\n<!-- <h4 style=\"font-size:80%\"><b>Temperatura - R401</b></h4> -->\n\n<center ng-bind-html=\"msg.payload\" style=\"font-size:150%\"></center>\n<center style=\"font-size:70%\">%</center>\n</body>\n</html> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 773.2299194335938,
+        "y": 160.99609375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae51be6f.179dc",
+        "type": "ui_gauge",
+        "z": "12134e3d.409a42",
+        "name": "",
+        "group": "ece601df.efd3a",
+        "order": 0,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": " Bateria",
+        "label": "V",
+        "format": "{{value}}",
+        "min": "2.95",
+        "max": "3.4",
+        "colors": [
+            "#ff0000",
+            "#ffff00",
+            "#008000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 774.229923248291,
+        "y": 346.9960906505585,
+        "wires": []
+    },
+    {
+        "id": "1572596f.c91357",
+        "type": "ui_gauge",
+        "z": "12134e3d.409a42",
+        "name": "",
+        "group": "ece601df.efd3a",
+        "order": 0,
+        "width": "3",
+        "height": "2",
+        "gtype": "donut",
+        "title": "Atualizado há",
+        "label": "min.",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "20",
+        "colors": [
+            "#008000",
+            "#ffff00",
+            "#ff0000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 757,
+        "y": 394,
+        "wires": []
+    },
+    {
+        "id": "c9a1fe98.43d22",
+        "type": "debug",
+        "z": "12134e3d.409a42",
+        "name": "debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 473,
+        "y": 30,
+        "wires": []
+    },
+    {
+        "id": "d30a5228.e447a",
+        "type": "ui_chart",
+        "z": "12134e3d.409a42",
+        "name": "",
+        "group": "ece601df.efd3a",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "label": "Corrente",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 774,
+        "y": 281,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "abebe2b6.328eb",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "mqttConnection",
+        "broker": "networkserver.maua.br",
+        "port": "1883",
+        "tls": "5f5923c6.cf8aec",
+        "clientid": "Node-RED from smartcampus",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "200",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "ece601df.efd3a",
+        "type": "ui_group",
+        "z": "",
+        "name": "DET-11: TCC Ar Condicionado",
+        "tab": "10bd35a.e3dcbca",
+        "order": 12,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "5f5923c6.cf8aec",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "maua.br.crt",
+        "keyname": "maua.br.key ",
+        "caname": "intermediate.crt",
+        "verifyservercert": true
+    },
+    {
+        "id": "10bd35a.e3dcbca",
+        "type": "ui_tab",
+        "z": "",
+        "name": "TCC AR CONDICIONADO",
+        "icon": "dashboard"
+    }
+]
