@@ -99,14 +99,15 @@ module.exports = {
     //    }]
     //},
 
-    adminAuth: {
-        type: "credentials",
-        users: [{
-            username: "otto",
-            password:"$2a$08$6O82S90VvNf1M.fH88HV5Otvafjvb3d.uaLBUrOB4KLTPaRUlC0..",
-            permissions: "*"
-        }]
-    },
+    // toggled: Henrique 22/06/2018 12:18
+    // adminAuth: {
+    //     type: "credentials",
+    //     users: [{
+    //         username: "admin",
+    //         password:"$2a$08$6O82S90VvNf1M.fH88HV5Otvafjvb3d.uaLBUrOB4KLTPaRUlC0..",
+    //         permissions: "*"
+    //     }]
+    // },
 
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
