@@ -124,6 +124,17 @@ module.exports = {
     //    }]
     //},
 
+    adminAuth: {
+       type: "credentials",
+       users: [{
+           username: "admin",
+           password: "$2a$04$bXQB7bccN4Plam9XUzmJrOC8WHSKAxL.UQO20MKuJJqxXlEEin9v2",
+           permissions: "*"
+       }]
+    },
+
+
+
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
     // The pass field is a bcrypt hash of the password.
