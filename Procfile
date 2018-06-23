@@ -1,1 +1,1 @@
-web: node-red --settings ./settings.js --userDir ./
+web: node-red --settings ./settings.js

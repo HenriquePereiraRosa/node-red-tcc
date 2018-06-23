@@ -240,7 +240,7 @@ module.exports = {
             // off - turn off all logging (doesn't affect metrics or audit)
             level: "debug",
             // Whether or not to include metric events in the log output
-            metrics: true,
+            metrics: false,
             // Whether or not to include audit events in the log output
             audit: false
         }
@@ -250,7 +250,7 @@ module.exports = {
     editorTheme: {
         projects: {
             // To enable the Projects feature, set this value to true
-            enabled: true
+            enabled: false
         }
     }
 }
