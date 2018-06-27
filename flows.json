@@ -380,7 +380,9 @@
         "closePayload": "",
         "willTopic": "",
         "willQos": "0",
-        "willPayload": ""
+        "willPayload": "",
+        "username": "PUBLIC",
+        "password": "public"
     },
     {
         "id": "7b5f0616.4b4428",
