@@ -1,15 +1,203 @@
 [
     {
-        "id": "7499bf5e.a278",
+        "id": "c72cdef0.3e244",
         "type": "tab",
         "label": "TCC AR CONDICIONADO",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "95101c56.a8c1b",
+        "id": "b99fadd5.5c6b9",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "networkserver.maua.br",
+        "port": "1883",
+        "tls": "bcb8adfd.c6021",
+        "clientid": "Node-RED from smartcampus",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "200",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "774515dd.c445ec",
+        "type": "ui_group",
+        "z": "",
+        "name": "DET-11 - [TCC Ar Cond.]",
+        "tab": "",
+        "order": 12,
+        "disp": true,
+        "width": "10"
+    },
+    {
+        "id": "bcb8adfd.c6021",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "maua.br.crt",
+        "keyname": "maua.br.key ",
+        "caname": "intermediate.crt",
+        "verifyservercert": true
+    },
+    {
+        "id": "99c1b24a.70bcc",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#183169",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#183169",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#183169",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#264ea7",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#183169",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            }
+        },
+        "site": {
+            "name": "Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c88f9e9b.e6a39",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "mqttConnection",
+        "broker": "networkserver.maua.br",
+        "port": "1883",
+        "tls": "b2e85013.c9eea",
+        "clientid": "Node-RED from smartcampus",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "200",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "8476920b.83b2d",
+        "type": "ui_group",
+        "z": "",
+        "name": "DET-11: TCC Ar Condicionado",
+        "tab": "20a55561.84b83a",
+        "order": 12,
+        "disp": false,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "b2e85013.c9eea",
+        "type": "tls-config",
+        "z": "",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "maua.br.crt",
+        "keyname": "maua.br.key ",
+        "caname": "intermediate.crt",
+        "verifyservercert": true
+    },
+    {
+        "id": "20a55561.84b83a",
+        "type": "ui_tab",
+        "z": "",
+        "name": "TCC AR CONDICIONADO",
+        "icon": "dashboard"
+    },
+    {
+        "id": "f1de5afc.9484e8",
         "type": "comment",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "DET-11",
         "info": "",
         "x": 80,
@@ -17,39 +205,39 @@
         "wires": []
     },
     {
-        "id": "6da24f8c.81f83",
+        "id": "3b8e6af2.645976",
         "type": "mqtt in",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "DET-11[Network Server-PUBLIC-Uplink]",
         "topic": "application/+/node/0004a30b001e8b8e/rx",
         "qos": "2",
-        "broker": "bd0ed62a.ad7aa8",
+        "broker": "c88f9e9b.e6a39",
         "x": 177,
         "y": 111,
         "wires": [
             [
-                "7d0f5947.0ae948"
+                "44fb6335.ed7b2c"
             ]
         ]
     },
     {
-        "id": "7d0f5947.0ae948",
+        "id": "44fb6335.ed7b2c",
         "type": "json",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Format JSON str to Obect",
         "pretty": false,
         "x": 214,
         "y": 150,
         "wires": [
             [
-                "47cc9bfd.772ab4"
+                "c813697d.49b2f8"
             ]
         ]
     },
     {
-        "id": "47cc9bfd.772ab4",
+        "id": "c813697d.49b2f8",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Parse JSON.data field",
         "func": "msg.payload = msg.payload.data;\nreturn msg;",
         "outputs": 1,
@@ -58,47 +246,47 @@
         "y": 188,
         "wires": [
             [
-                "5fdf61e7.35ca9"
+                "d9bd9325.804e6"
             ]
         ]
     },
     {
-        "id": "5fdf61e7.35ca9",
+        "id": "d9bd9325.804e6",
         "type": "decode",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Decode [Base64]",
         "encode": "Base64",
         "x": 220,
         "y": 233,
         "wires": [
             [
-                "5e2edf84.5f681"
+                "9823e4f5.6392a8"
             ]
         ]
     },
     {
-        "id": "5e2edf84.5f681",
+        "id": "9823e4f5.6392a8",
         "type": "encode",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "",
         "encode": "Hex",
         "x": 262,
         "y": 290,
         "wires": [
             [
-                "929108ed.d0b8a8",
-                "ca331be5.c6ba18",
-                "950b3ad6.574ed8",
-                "cb9d7f55.88149",
-                "be1ba290.09b7d",
-                "da9c3cc2.17dba"
+                "133702e8.664fad",
+                "f07ef3ef.6f94c",
+                "d65a687b.0af3d8",
+                "a4c66af2.c5b638",
+                "11e8222b.1ff02e",
+                "d00f0401.f965c8"
             ]
         ]
     },
     {
-        "id": "929108ed.d0b8a8",
+        "id": "133702e8.664fad",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Contagem Regressiva",
         "func": "//call constructor Date() and pass to now\nvar now = new Date();\n//time_now receive current time\nvar time_now = now.getTime();\n\nif (typeof last_broker_time === 'undefined'){\n    last_broker_time = time_now;\n}\n\nif (msg.payload){\n    last_broker_time = time_now;\n    } \n\n//1. diference between times\n//2. divide per 1000 to parse miliseconds to second\n//3. divide per 60 to parse second to minute\n//4. .toFixed(0) return an int value\n//5. parseInt(\"string\",10) --> returns a decimal value based on own string value\nvar difference_between_times = parseInt(((time_now - last_broker_time)/60000).toFixed(0),10);\n\n//pass to msg.payload the desire velue to show on gauge in dashboard\nmsg.payload = difference_between_times; \nreturn msg;",
         "outputs": 1,
@@ -107,14 +295,14 @@
         "y": 396.8040452003479,
         "wires": [
             [
-                "e8cdabba.73d078"
+                "e5ac262c.1562a8"
             ]
         ]
     },
     {
-        "id": "641e1d54.5e1f64",
+        "id": "724c71a.7fd8a9",
         "type": "inject",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "",
         "topic": "",
         "payload": "msg.time_sample",
@@ -126,14 +314,14 @@
         "y": 395.8040466308594,
         "wires": [
             [
-                "929108ed.d0b8a8"
+                "133702e8.664fad"
             ]
         ]
     },
     {
-        "id": "ca331be5.c6ba18",
+        "id": "f07ef3ef.6f94c",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Voltage DET-11",
         "func": "msg.payload = (parseInt(msg.payload.substr(20,4),16)/1000).toFixed(2);\nreturn msg;",
         "outputs": 1,
@@ -142,14 +330,14 @@
         "y": 346,
         "wires": [
             [
-                "6ee98a4e.884584"
+                "1a56e228.9af3de"
             ]
         ]
     },
     {
-        "id": "be1ba290.09b7d",
+        "id": "11e8222b.1ff02e",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Temperature-DET11",
         "func": "msg.payload = parseInt(msg.payload.substr(8,4),16)/10;\nreturn msg;",
         "outputs": 1,
@@ -158,14 +346,14 @@
         "y": 100.99217987060547,
         "wires": [
             [
-                "8ecf6052.abaab"
+                "e691cdab.d6f72"
             ]
         ]
     },
     {
-        "id": "cb9d7f55.88149",
+        "id": "a4c66af2.c5b638",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Humidity-DET11",
         "func": "msg.payload = parseInt(msg.payload.substr(14,4),16)/10;\nreturn msg;",
         "outputs": 1,
@@ -174,14 +362,14 @@
         "y": 160.99217987060547,
         "wires": [
             [
-                "5fa0fc7b.fff634"
+                "9b03150.61e0ae8"
             ]
         ]
     },
     {
-        "id": "950b3ad6.574ed8",
+        "id": "d65a687b.0af3d8",
         "type": "function",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "Current-DET11",
         "func": "current = (parseInt(msg.payload.substr(2,4),16)) - 102;\nif (current > 0){\n    msg.payload =(current/(0.066/(3.3/1024))).toFixed(2);\n}else{\n    msg.payload = 0;\n}\nreturn msg;",
         "outputs": 1,
@@ -190,16 +378,16 @@
         "y": 220.99217987060547,
         "wires": [
             [
-                "7563a62d.0d39e8",
-                "3a64197a.cedb36"
+                "88156f99.62708",
+                "66e5e6db.685cc8"
             ]
         ]
     },
     {
-        "id": "7563a62d.0d39e8",
+        "id": "88156f99.62708",
         "type": "ui_template",
-        "z": "7499bf5e.a278",
-        "group": "7b5f0616.4b4428",
+        "z": "c72cdef0.3e244",
+        "group": "8476920b.83b2d",
         "name": "current",
         "order": 0,
         "width": "4",
@@ -215,10 +403,10 @@
         ]
     },
     {
-        "id": "8ecf6052.abaab",
+        "id": "e691cdab.d6f72",
         "type": "ui_template",
-        "z": "7499bf5e.a278",
-        "group": "7b5f0616.4b4428",
+        "z": "c72cdef0.3e244",
+        "group": "8476920b.83b2d",
         "name": "temperature",
         "order": 0,
         "width": "1",
@@ -234,10 +422,10 @@
         ]
     },
     {
-        "id": "5fa0fc7b.fff634",
+        "id": "9b03150.61e0ae8",
         "type": "ui_template",
-        "z": "7499bf5e.a278",
-        "group": "7b5f0616.4b4428",
+        "z": "c72cdef0.3e244",
+        "group": "8476920b.83b2d",
         "name": "humidity",
         "order": 0,
         "width": "1",
@@ -253,11 +441,11 @@
         ]
     },
     {
-        "id": "6ee98a4e.884584",
+        "id": "1a56e228.9af3de",
         "type": "ui_gauge",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "",
-        "group": "7b5f0616.4b4428",
+        "group": "8476920b.83b2d",
         "order": 0,
         "width": "3",
         "height": "2",
@@ -279,11 +467,11 @@
         "wires": []
     },
     {
-        "id": "e8cdabba.73d078",
+        "id": "e5ac262c.1562a8",
         "type": "ui_gauge",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "",
-        "group": "7b5f0616.4b4428",
+        "group": "8476920b.83b2d",
         "order": 0,
         "width": "3",
         "height": "2",
@@ -305,9 +493,9 @@
         "wires": []
     },
     {
-        "id": "da9c3cc2.17dba",
+        "id": "d00f0401.f965c8",
         "type": "debug",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "debug",
         "active": true,
         "tosidebar": true,
@@ -319,11 +507,11 @@
         "wires": []
     },
     {
-        "id": "3a64197a.cedb36",
+        "id": "66e5e6db.685cc8",
         "type": "ui_chart",
-        "z": "7499bf5e.a278",
+        "z": "c72cdef0.3e244",
         "name": "",
-        "group": "7b5f0616.4b4428",
+        "group": "8476920b.83b2d",
         "order": 0,
         "width": "0",
         "height": "0",
@@ -359,60 +547,5 @@
             [],
             []
         ]
-    },
-    {
-        "id": "bd0ed62a.ad7aa8",
-        "type": "mqtt-broker",
-        "z": "",
-        "name": "mqttConnection",
-        "broker": "networkserver.maua.br",
-        "port": "1883",
-        "tls": "fc16eb7c.0032c8",
-        "clientid": "Node-RED from smartcampus",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "200",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "closeTopic": "",
-        "closePayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "username": "PUBLIC",
-        "password": "public"
-    },
-    {
-        "id": "7b5f0616.4b4428",
-        "type": "ui_group",
-        "z": "",
-        "name": "DET-11: TCC Ar Condicionado",
-        "tab": "3ff65872.c0a1c8",
-        "order": 12,
-        "disp": false,
-        "width": "12",
-        "collapse": false
-    },
-    {
-        "id": "fc16eb7c.0032c8",
-        "type": "tls-config",
-        "z": "",
-        "name": "",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "certname": "maua.br.crt",
-        "keyname": "maua.br.key ",
-        "caname": "intermediate.crt",
-        "verifyservercert": true
-    },
-    {
-        "id": "3ff65872.c0a1c8",
-        "type": "ui_tab",
-        "z": "",
-        "name": "TCC AR CONDICIONADO",
-        "icon": "dashboard"
     }
 ]

@@ -20,7 +20,7 @@ var fs = require("fs");
 
 module.exports = {
     // the tcp port that the Node-RED web server is listening on
-    uiPort: process.env.PORT || 80,
+    uiPort: process.env.PORT || 1880,
 
     // By default, the Node-RED UI accepts connections on all IPv4 interfaces.
     // To listen on all IPv6 addresses, set uiHost to "::",
@@ -238,11 +238,11 @@ module.exports = {
             // debug - record information which is more verbose than info + info + warn + error + fatal errors
             // trace - record very detailed logging + debug + info + warn + error + fatal errors
             // off - turn off all logging (doesn't affect metrics or audit)
-            level: "debug",
+            level: "trace",
             // Whether or not to include metric events in the log output
-            metrics: false,
+            metrics: true,
             // Whether or not to include audit events in the log output
-            audit: false
+            audit: true
         }
     },
 
